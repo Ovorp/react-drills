@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import './css/App.css';
+import AddTo from './component/AddTo';
+import FilteredList from './component/FilteredList';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      userInput: '',
+      userArr: ['this', 'Name', 'JavaScript', 'find'],
+    };
+  }
+
+  handleUpdateInput = (e) => {
+    this.setState({
+      userInput: e.target.value,
+    });
+  };
+
+  handleUpdateArr = () => {
+    this.setState({
+      userArr: [...this.state.userArr, this.state.userInput],
+      userInput: '',
+    });
+  };
+
+  render() {
+    return (
+      <div className="app">
+        <h1>You can add at filter this list</h1>
+        <AddTo
+          userInput={this.handleUpdateInput}
+          userArr={this.handleUpdateArr}
+          val={this.state.userInput}
+        />
+        <FilteredList Arr={this.state.userArr} />
+      </div>
+    );
+  }
 }
-
-export default App;
