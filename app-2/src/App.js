@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import List from './components/List';
+import AddTo from './components/AddTo';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './css/App.css';
+
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      userInput: '',
+      userArr: ['Monday', 'Sharks', 'Candy', 'Shoes', 1],
+    };
+  }
+
+  handleUpdateUserInput = (e) => {
+    this.setState({
+      userInput: e.target.value,
+    });
+  };
+
+  handleUpdateUserArr = () => {
+    let oldArr = [...this.state.userArr, this.state.userInput];
+    this.setState({
+      userArr: oldArr,
+      userInput: '',
+    });
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <h1>Here is a list you can add to.</h1>
+        <AddTo
+          updateInput={this.handleUpdateUserInput}
+          updateArr={this.handleUpdateUserArr}
+          val={this.state.userInput}
+        />
+        <List userArr={this.state.userArr} />
+      </div>
+    );
+  }
 }
-
-export default App;
