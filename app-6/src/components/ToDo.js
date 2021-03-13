@@ -23,6 +23,14 @@ export default class ToDo extends Component {
     });
   };
 
+  handleRemoveFromList = (index) => {
+    let oldList = [...this.state.toDoListArr];
+    oldList.splice(index, 1);
+    this.setState({
+      toDoListArr: oldList,
+    });
+  };
+
   render() {
     console.log(this.state);
     return (
@@ -34,8 +42,13 @@ export default class ToDo extends Component {
         />
         <button onClick={this.handleupdateToDoListArr}>Add to List </button>
         <ul>
-          {this.state.toDoListArr.map((val) => {
-            return <li>{val}</li>;
+          {this.state.toDoListArr.map((val, i) => {
+            return (
+              <li key={(val, i)}>
+                <span onClick={() => this.handleRemoveFromList(i)}>X</span>
+                {val}
+              </li>
+            );
           })}
         </ul>
       </div>
