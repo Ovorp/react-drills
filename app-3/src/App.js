@@ -13,9 +13,9 @@ export default class App extends Component {
     };
   }
 
-  handleUpdateInput = (e) => {
+  handleUpdateInput = (val) => {
     this.setState({
-      userInput: e.target.value,
+      userInput: val,
     });
   };
 

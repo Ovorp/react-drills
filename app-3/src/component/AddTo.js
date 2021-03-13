@@ -6,7 +6,7 @@ export default class AddTo extends Component {
       <div>
         <input
           placeholder="add text here"
-          onChange={this.props.userInput}
+          onChange={(e) => this.props.userInput(e.target.value)}
           value={this.props.val}
         />
         <button onClick={this.props.userArr}>
